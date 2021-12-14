@@ -1,0 +1,52 @@
+<%- include('../partials/_header.ejs'); -%>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/sedes/actualizar/<%= data.id %>" method="post">
+                        <legend>Actualizar sede</legend>
+                        <div class="form-group mt-2">
+                            <input type="text" name="nombre" placeholder="Nombre" class="form-control" value="<%= data.nombre %>">
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-4">Actualizar Sede</button>
+                        <a href="/sedes" class="btn btn-danger mt-4">Cancelar</a>
+                    </form>
+                    <div class="row">
+                        <legend class="mt-4">Total alumnos: <%= data.alumnos %></legend class="mt-4">
+                        <a href="/alumnos/export?sede_id=<%= data.id %>" class="btn btn-dark"><i class="fas fa-download"></i></a>
+                    </div>
+                    <table class="table table-bordered table-hover mt-4">
+                        <thead>
+                            <tr>
+                                <td>#</td>
+                                <td>Nombre</td>
+                                <td>Apellido</td>
+                                <td>Sexo</td>
+                                <td>fecha_nacimiento</td>
+                                <td>sede</td>
+                                <td>Actions</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (alumnos) { %>
+                                <% for (var i = 0; i < alumnos.length; i++) { %>
+                                    <tr>
+                                        <td><%= alumnos[i].id %></td>
+                                        <td><%= alumnos[i].nombre %></td>
+                                        <td><%= alumnos[i].apellido %></td>
+                                        <td><%= alumnos[i].sexo %></td>
+                                        <td><%= alumnos[i].fecha_nacimiento %></td>
+                                        <td><%= alumnos[i].sede || 'sin asignar' %></td>
+                                        <td>
+                                            <a href="/alumnos/actualizar/<%= alumnos[i].id %>/<%= data.id %>" class="btn btn-info"><i class="far fa-edit"></i></a>
+                                        </td>
+                                    </tr>
+                                <% } %>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('../partials/_footer.ejs'); -%>

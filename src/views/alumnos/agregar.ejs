@@ -1,0 +1,57 @@
+<div class="card">
+    <div class="card-body">
+        <form action="/alumnos/agregar" method="post" enctype="multipart/form-data">
+            <legend>Agregar alumno</legend>
+            <div class="form-group mt-2">
+                <input type="text" name="nombre" placeholder="Nombre" class="form-control" required>
+            </div>
+            <div class="form-group mt-2">
+                <input type="text" name="apellido" placeholder="Apellido" class="form-control" required>
+            </div>
+            <div class="custom-file mt-2">
+                <legend class="mt-2">Foto del alumno</legend>
+                <img src="#" width="200" height="200" class="img-thumbnail" id="fotoAlumno" alt="cargar_una_foto_del_alumno">
+                <input type="file" name="foto" placeholder="Foto" class="form-control" id="inputFotoAlumno" accept="image/*">
+            </div>
+            <legend class="mt-2">Sexo</legend>
+            <div class="form-check mt-2">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="sexo" id="alumnoSexoForm" value="M" checked>
+                  Masculino
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="sexo" id="alumnoSexoForm" value="F">
+                  Femenino
+                </label>
+            </div>
+            <div class="form-group mt-2">
+                <legend class="mt-2">Fecha de nacimiento</legend>
+                <input type="date" name="fecha_nacimiento" placeholder="Fecha Nacimiento" class="form-control">
+            </div>
+            <div class="form-group mt-2">
+                <legend class="mt-2">Sede</legend>
+                <select name="sede_id" class="form-select" searchable="buscar sede...">
+                    <% if (!sedes.length) { %>
+                        <option value="" disabled selected>No existen sedes creadas por favor crear sedes</option>
+                    <% }else{ %>
+                        <option value="" disabled selected>Seleccionar sede del alumno...</option>
+                        <% for (var i = 0; i < sedes.length; i++) { %>
+                            <option value="<%= sedes[i].id %>"><%= sedes[i].nombre %></option>
+                        <% } %>
+                    <% } %>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Guardar Alumno</button>
+        </form>
+    </div>
+</div>
+<script>
+    inputFotoAlumno.onchange = evt => {
+        const [file] = inputFotoAlumno.files
+        if (file) {
+            fotoAlumno.src = URL.createObjectURL(file)
+        }
+      }
+</script>

@@ -1,0 +1,5 @@
+.env
+/docker
+public/uploads
+/node_modules
+package-lock.json
